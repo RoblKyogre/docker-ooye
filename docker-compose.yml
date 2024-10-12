@@ -1,0 +1,13 @@
+services:
+  ooye:
+    #image: ooye:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ooye
+    restart: unless-stopped
+    volumes:
+      - "./ooye.db:/app/ooye.db"
+      - "./registration.yaml:/app/registration.yaml"
+    ports:
+      - 6693:6693
