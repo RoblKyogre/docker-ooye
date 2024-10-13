@@ -1,0 +1,31 @@
+diff --git a/scripts/setup.js b/scripts/setup.js
+index f1817b7..f9dfa20 100644
+--- a/scripts/setup.js
++++ b/scripts/setup.js
+@@ -123,11 +123,11 @@ async function validateHomeserverOrigin(serverUrlPrompt, url) {
+ 		const app = createApp()
+ 		app.use(defineEventHandler(() => "Out Of Your Element is listening.\n"))
+ 		const server = createServer(toNodeListener(app))
+-		await server.listen(6693)
++		await server.listen(6693, "0.0.0.0")
+ 
+ 		console.log("OOYE has its own web server. It needs to be accessible on the public internet.")
+ 		console.log("You need to enter a public URL where you will be able to host this web server.")
+-		console.log("OOYE listens on localhost:6693, so you will probably have to set up a reverse proxy.")
++		console.log("OOYE listens on 0.0.0.0:6693, so you will probably have to set up a reverse proxy.")
+ 		console.log("Now listening on port 6693. Feel free to send some test requests.")
+ 		/** @type {{bridge_origin: string}} */
+ 		const bridgeOriginResponse = await prompt({
+diff --git a/scripts/start-server.js b/scripts/start-server.js
+index f09c458..a928680 100755
+--- a/scripts/start-server.js
++++ b/scripts/start-server.js
+@@ -25,7 +25,7 @@ const app = createApp()
+ const router = createRouter()
+ app.use(router)
+ const server = createServer(toNodeListener(app))
+-server.listen(reg.socket || new URL(reg.url).port)
++server.listen(reg.socket || new URL(reg.url).port, "0.0.0.0")
+ const as = Object.assign(new EventEmitter(), {app, router, server}) // @ts-ignore
+ passthrough.as = as
+ 
