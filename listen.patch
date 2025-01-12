@@ -1,10 +1,10 @@
 diff --git a/scripts/setup.js b/scripts/setup.js
-index f1817b7..f9dfa20 100644
+index 3491106..eff3fdc 100644
 --- a/scripts/setup.js
 +++ b/scripts/setup.js
-@@ -123,11 +123,11 @@ async function validateHomeserverOrigin(serverUrlPrompt, url) {
+@@ -137,11 +137,11 @@ function defineEchoHandler() {
  		const app = createApp()
- 		app.use(defineEventHandler(() => "Out Of Your Element is listening.\n"))
+ 		app.use(defineEchoHandler())
  		const server = createServer(toNodeListener(app))
 -		await server.listen(6693)
 +		await server.listen(6693, "0.0.0.0")
