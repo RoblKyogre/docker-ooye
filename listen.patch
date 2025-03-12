@@ -1,4 +1,4 @@
-diff --cc scripts/setup.js
+diff --git a/scripts/setup.js b/scripts/setup.js
 index 15c17cd,eff3fdc..0000000
 --- a/scripts/setup.js
 +++ b/scripts/setup.js
