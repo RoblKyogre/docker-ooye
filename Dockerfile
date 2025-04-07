@@ -6,8 +6,9 @@ RUN git clone -b main https://gitdab.com/cadence/out-of-your-element.git /app
 
 WORKDIR /app
 
-ADD listen.patch /listen.patch
-RUN git apply  --3way --ignore-space-change --ignore-whitespace /listen.patch && rm /listen.patch
+RUN for FILE in "scripts/setup.js" "scripts/start-server.js"; do \
+    sed -i '/server\.listen/{s/)\([^)]*\)$/, "0.0.0.0"&/}' "${FILE}"; \
+    done
 
 RUN npm install
 RUN ln -s /app/addbot.sh /usr/bin/addbot
